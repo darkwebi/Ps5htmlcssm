@@ -1,0 +1,136 @@
+/* ======================================
+   RESET GERAL
+====================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+    min-height: 100vh;
+    color: #ffffff;
+}
+
+/* ======================================
+   CABEÇALHO (HEADER)
+====================================== */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+}
+
+/* Lado Esquerdo */
+header .left {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+header .left a {
+    color: #cccccc;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+header .left a:hover,
+header .left a:first-child {
+    color: #ffffff;
+}
+
+header .left a:first-child::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #0066cc;
+    border-radius: 3px;
+}
+
+/* Lado Direito */
+header .right {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+header .right a {
+    color: #cccccc;
+    font-size: 20px;
+    transition: color 0.3s ease;
+    text-decoration: none;
+}
+
+header .right a:hover {
+    color: #ffffff;
+}
+
+header .right img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #0066cc;
+    transition: transform 0.2s ease;
+}
+
+header .right img:hover {
+    transform: scale(1.1);
+}
+
+header .time {
+    font-size: 16px;
+    color: #ffffff;
+    font-weight: 500;
+    background: rgba(0, 102, 204, 0.2);
+    padding: 6px 12px;
+    border-radius: 20px;
+}
+
+/* ======================================
+   RESPONSIVIDADE (CELULAR)
+====================================== */
+@media (max-width: 768px) {
+    header {
+        padding: 12px 15px;
+    }
+
+    header .left {
+        gap: 15px;
+    }
+
+    header .left a {
+        font-size: 14px;
+    }
+
+    header .right {
+        gap: 12px;
+    }
+
+    header .right a {
+        font-size: 18px;
+    }
+
+    header .time {
+        font-size: 14px;
+        padding: 4px 8px;
+    }
+}
+
