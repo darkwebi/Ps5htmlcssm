@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PS5 Interface</title>
+  <script src="https://kit.fontawesome.com/0c87a70838.js"></script>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <header>
+    <div class="left">
+      <a href="#">Jeux</a>
+      <a href="#">Contenu multimédia</a>
+    </div>
+    <div class="right">
+      <a href="#"><i class="fas fa-search"></i></a>
+      <a href="#"><i class="fas fa-cog"></i></a>
+      <a href="#"><img src="assets/images/profil-pic.jpg" alt="Profil"></a>
+      <!-- ✅ HORA DE CÁCERES AQUI -->
+      <span class="time" id="hora-caceres">--:--</span>
+    </div>
+  </header>
+
+  <!-- ⏰ SCRIPT DA HORA -->
+  <script>
+  function atualizarHoraCaceres() {
+      const agora = new Date();
+      const hora = agora.toLocaleTimeString('pt-BR', {
+          timeZone: 'America/Cuiaba',
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: false
+      });
+      document.getElementById('hora-caceres').textContent = hora;
+  }
+  atualizarHoraCaceres();
+  setInterval(atualizarHoraCaceres, 60000);
+  </script>
+
+</body>
+</html>
