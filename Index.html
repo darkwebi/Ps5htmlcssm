@@ -198,6 +198,481 @@
     }
 
     /* ======================================
+       BOTÃO JOGAR + PONTINHOS — LUGAR MARCADO!
+    ====================================== */
+    .play-button {
+        position: absolute;
+        bottom: 130px;
+        left: 50px;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .play-btn {
+        background: transparent;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        transition: transform 0.25s ease;
+        width: 200px;
+        height: 50px;
+    }
+
+    .play-btn svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
+
+    .play-btn:hover {
+        transform: scale(1.05);
+    }
+
+    .more-btn {
+        background: transparent;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        width: 50px;
+        height: 50px;
+        transition: transform 0.25s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .more-btn svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
+
+    .more-btn:hover {
+        transform: scale(1.1);
+    }
+
+    /* ======================================
+       INFO LADO DIREITO — FICA TUDO PARADO
+    ====================================== */
+    .side-info {
+        position: absolute;
+        right: 50px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .game-card {
+        width: 200px;
+        border-radius: 8px;
+        overflow: hidden;
+        background: rgba(0,0,0,0.5);
+        border: 1px solid rgba(255,255,255,0.1);
+        backdrop-filter: blur(10px);
+    }
+
+    .game-card img {
+        width: 100%;
+        height: 120px;
+        object-fit: cover;
+    }
+
+    .game-card .labels {
+        padding: 10px;
+    }
+
+    .game-card .tag {
+        background: #ffffff;
+        color: #000000;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 3px 6px;
+        display: inline-block;
+        margin-bottom: 6px;
+        border-radius: 2px;
+    }
+
+    .game-card .tag-blue {
+        background: #0066cc;
+        color: #ffffff;
+        margin-left: 4px;
+    }
+
+    .progress-box {
+        background: rgba(0,0,0,0.5);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 8px;
+        padding: 12px 15px;
+        display: flex;
+        justify-content: space-between;
+        width: 200px;
+        backdrop-filter: blur(10px);
+    }
+
+    .progress-item {
+        text-align: center;
+        flex: 1;
+    }
+
+    .progress-label {
+        font-size: 12px;
+        color: #999999;
+        margin-bottom: 5px;
+    }
+
+    .progress-value {
+        font-size: 18px;
+        font-weight: 600;
+        color: #ffffff;
+    }
+
+    /* ======================================
+       RESPONSIVIDADE
+    ====================================== */
+    @media (max-width: 768px) {
+        header {
+            padding: 15px 20px;
+        }
+        header .left-menu {
+            gap: 25px;
+        }
+        header .left-menu a {
+            font-size: 15px;
+        }
+        .games-carousel {
+            padding-left: 20px;
+            gap: 15px;
+        }
+        .game-cover {
+            width: 70px;
+            height: 95px;
+        }
+        .game-cover.active {
+            width: 90px;
+            height: 120px;
+        }
+        .game-name {
+            left: 20px;
+            top: 230px;
+            font-size: 16px;
+        }
+        .play-button {
+            left: 20px;
+            bottom: 80px;
+        }
+        .play-btn {
+            width: 160px;
+            height: 44px;
+        }
+        .more-btn {
+            width: 44px;
+            height: 44px;
+        }
+        .side-info {
+            right: 20px;
+            transform: translateY(-50%) scale(0.85);
+        }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🖼️ FUNDO — FICA PARADO, SÓ MUDA A IMAGEM -->
+  <div class="game-bg" id="game-bg"></div>
+  <div class="bg-overlay"></div>
+
+  <!-- 🔝 CABEÇALHO — FICA PARADO -->
+  <header>
+    <div class="left-menu">
+      <a href="#">Jogos</a>
+      <a href="#">Conteúdo Multimídia</a>
+    </div>
+    <div class="right-menu">
+      <a href="#"><i class="fas fa-search"></i></a>
+      <a href="#"><i class="fas fa-cog"></i></a>
+      <img src="assets/images/perfil.jpg" alt="Perfil" class="profile-pic">
+      <span class="time" id="hora-caceres">--:--</span>
+    </div>
+  </header>
+
+  <!-- 🎮 SÓ O CARROSSEL DE CAPAS SE MOVE! -->
+  <div class="carousel-viewport">
+    <div class="games-carousel" id="carousel">
+      <div class="game-cover" data-index="0">
+        <img src="assets/images/capa-demons-souls.jpg" alt="Demon's Souls">
+      </div>
+      <div class="game-cover" data-index="1">
+        <img src="assets/images/capa-like-a-dragon.jpg" alt="Like a Dragon">
+      </div>
+      <div class="game-cover active" data-index="2">
+        <img src="assets/images/capa-dirt5.jpg" alt="DIRT 5">
+      </div>
+      <div class="game-cover" data-index="3">
+        <img src="assets/images/capa-god-of-war.jpg" alt="God of War">
+      </div>
+      <div class="game-cover" data-index="4">
+        <img src="assets/images/capa-spider-man.jpg" alt="Spider-Man">
+      </div>
+      <div class="game-cover" data-index="5">
+        <img src="assets/images/capa-horizon.jpg" alt="Horizon">
+      </div>
+      <div class="game-cover" data-index="6">
+        <img src="assets/images/capa-ratchet-clank.jpg" alt="Ratchet & Clank">
+      </div>
+    </div>
+  </div>
+
+  <!-- 📛 NOME DO JOGO — FICA PARADO -->
+  <div class="game-name" id="game-title">DIRT 5™ | PS5</div>
+
+  <!-- ▶️ BOTÃO JOGAR + PONTINHOS — NO LUGAR QUE VOCÊ MARCOU! -->
+  <div class="play-button">
+    <button class="play-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" width="320" height="80">
+        <rect x="0" y="0" width="320" height="80" rx="40" fill="#00439C" />
+        <text x="50%" y="55%" 
+              font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" 
+              font-size="26" 
+              font-weight="bold" 
+              fill="#FFFFFF" 
+              text-anchor="middle" 
+              dominant-baseline="middle">
+          Jogar
+        </text>
+      </svg>
+    </button>
+    <button class="more-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80">
+        <circle cx="40" cy="40" r="38" fill="#00439C" />
+        <circle cx="26" cy="40" r="4" fill="#FFFFFF" />
+        <circle cx="40" cy="40" r="4" fill="#FFFFFF" />
+        <circle cx="54" cy="40" r="4" fill="#FFFFFF" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- 📊 INFO LADO DIREITO — FICA TUDO PARADO -->
+  <div class="side-info">
+    <div class="game-card">
+      <img src="assets/images/capa-dirt5.jpg" alt="DIRT 5" id="side-cover">
+      <div class="labels">
+        <span class="tag">Jogo Completo</span>
+        <span class="tag tag-blue">Atualização PS5 grátis</span>
+      </div>
+    </div>
+    <div class="progress-box">
+      <div class="progress-item">
+        <div class="progress-label">Progresso</div>
+        <div class="progress-value" id="progress-val">6%</div>
+      </div>
+      <div class="progress-item">
+        <div class="progress-label">Conquistas</div>
+        <div class="progress-value" id="trophies-val">3/21</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ⏰ HORA DE CÁCERES — MT
+    function atualizarHoraCaceres() {
+        const agora = new Date();
+        const hora = agora.toLocaleTimeString('pt-BR', {
+            timeZone: 'America/Cuiaba',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+        });
+        document.getElementById('hora-caceres').textContent = hora;
+    }
+    atualizarHoraCaceres();
+    setInterval(atualizarHoraCaceres, 60000);
+
+    // 🎮 DADOS DOS 7 JOGOS
+    const jogos = [
+        { nome: "Demon's Souls™ | PS5", fundo: "assets/images/fundo-demons-souls.jpg", capa: "assets/images/capa-demons-souls.jpg", progresso: "12%", conquistas: "8/48" },
+        { nome: "Like a Dragon™ | PS5", fundo: "assets/images/fundo-like-a-dragon.jpg", capa: "assets/images/capa-like-a-dragon.jpg", progresso: "45%", conquistas: "15/35" },
+        { nome: "DIRT 5™ | PS5", fundo: "assets/images/fundo-dirt5.jpg", capa: "assets/images/capa-dirt5.jpg", progresso: "6%", conquistas: "3/21" },
+        { nome: "God of War™ | PS5", fundo: "assets/images/fundo-god-of-war.jpg", capa: "assets/images/capa-god-of-war.jpg", progresso: "78%", conquistas: "24/36" },
+        { nome: "Marvel's Spider-Man™ | PS5", fundo: "assets/images/fundo-spider-man.jpg", capa: "assets/images/capa-spider-man.jpg", progresso: "32%", conquistas: "12/42" },
+        { nome: "Horizon Forbidden West™ | PS5", fundo: "assets/images/fundo-horizon.jpg", capa: "assets/images/capa-horizon.jpg", progresso: "55%", conquistas: "18/58" },
+        { nome: "Ratchet & Clank™ | PS5", fundo: "assets/images/fundo-ratchet-clank.jpg", capa: "assets/images/capa-ratchet-clank.jpg", progresso: "20%", conquistas: "7/32" }
+    ];
+
+    const covers = document.querySelectorAll('.game-cover');
+    const carousel = document.getElementById('carousel');
+    const gameBg = document.getElementById('game-bg');
+    const gameTitle = document.getElementById('game-title');
+    const sideCover = document.getElementById('side-cover');
+    const progressVal = document.getElementById('progress-val');
+    const trophiesVal = document.getElementById('trophies-val');
+    
+    let currentIndex = 2; // Começa no DIRT 5
+
+    // 📐 CALCULA QUANTO MOVER SÓ O CARROSSEL
+    function calcularDeslocamento() {
+        const capaLargura = covers[0].offsetWidth + 20;
+        const deslocamento = 50 - (currentIndex * capaLargura);
+        return deslocamento;
+    }
+
+    // 🔄 ATUALIZA — SÓ O CARROSSEL SE MOVE!
+    function atualizarCarrossel() {
+        covers.forEach((cover, i) => {
+            cover.classList.remove('active');
+            if (i === currentIndex) cover.classList.add('active');
+        });
+
+        carousel.style.transform = `translateX(${calcularDeslocamento()}px)`;
+
+        const jogo = jogos[currentIndex];
+        gameBg.style.backgroundImage = `url('${jogo.fundo}')`;
+        gameTitle.textContent = jogo.nome;
+        sideCover.src = jogo.capa;
+        progressVal.textContent = jogo.progresso;
+        trophiesVal.textContent = jogo.conquistas;
+    }
+
+    // 👆 CLIQUE NAS CAPAS
+    covers.forEach((cover, i) => {
+        cover.addEventListener('click', () => {
+            currentIndex = i;
+            atualizarCarrossel();
+        });
+    });
+
+    // ⬅️➡️ DESLIZAR NO CELULAR
+    let touchStartX = 0;
+    document.addEventListener('touchstart', e => touchStartX = e.touches[0].clientX);
+    document.addEventListener('touchend', e => {
+        const touchEndX = e.changedTouches[0].clientX;
+        if (touchStartX - touchEndX > 50) {
+            currentIndex = (currentIndex + 1) % jogos.length;
+            atualizarCarrossel();
+        } else if (touchEndX - touchStartX > 50) {
+            currentIndex = (currentIndex - 1 + jogos.length) % jogos.length;
+            atualizarCarrossel();
+        }
+    });
+
+    // ⌨️ SETAS DO TECLADO
+    document.addEventListener('keydown', e => {
+        if (e.key === 'ArrowRight') {
+            currentIndex = (currentIndex + 1) % jogos.length;
+            atualizarCarrossel();
+        } else if (e.key === 'ArrowLeft') {
+            currentIndex = (currentIndex - 1 + jogos.length) % jogos.length;
+            atualizarCarrossel();
+        }
+    });
+
+    window.addEventListener('load', atualizarCarrossel);
+    window.addEventListener('resize', atualizarCarrossel);
+  </script>
+
+</body>
+</html>
+        transition: color 0.25s ease;
+    }
+
+    header .right-menu a:hover {
+        color: #ffffff;
+    }
+
+    header .profile-pic {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #444;
+        transition: transform 0.2s ease;
+    }
+
+    header .profile-pic:hover {
+        transform: scale(1.05);
+    }
+
+    header .time {
+        font-size: 18px;
+        color: #ffffff;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+    }
+
+    /* ======================================
+       ÁREA DO CARROSSEL — SÓ ELE SE MOVE!
+    ====================================== */
+    .carousel-viewport {
+        position: absolute;
+        top: 120px;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        z-index: 10;
+        pointer-events: none;
+    }
+
+    .games-carousel {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding-left: 50px;
+        transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+        pointer-events: auto;
+    }
+
+    .game-cover {
+        flex-shrink: 0;
+        width: 100px;
+        height: 130px;
+        border-radius: 8px;
+        overflow: hidden;
+        border: 2px solid transparent;
+        transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+        opacity: 0.5;
+        transform: scale(0.85);
+        cursor: pointer;
+    }
+
+    .game-cover img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .game-cover:hover {
+        opacity: 0.8;
+        transform: scale(0.92);
+    }
+
+    .game-cover.active {
+        width: 130px;
+        height: 170px;
+        border-color: #ffffff;
+        opacity: 1;
+        transform: scale(1);
+        box-shadow: 0 0 25px rgba(255,255,255,0.2), 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    /* ======================================
+       NOME DO JOGO — FICA PARADO NO LUGAR
+    ====================================== */
+    .game-name {
+        position: absolute;
+        top: 310px;
+        left: 50px;
+        font-size: 22px;
+        font-weight: 600;
+        color: #ffffff;
+        z-index: 10;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+    }
+
+    /* ======================================
        BOTÃO JOGAR — FICA PARADO NO LUGAR
     ====================================== */
     .play-button {
