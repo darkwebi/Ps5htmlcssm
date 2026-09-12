@@ -211,13 +211,19 @@
     }
 
     .play-btn {
-        background: url('assets/images/botao-jogar.png') no-repeat center center;
-        background-size: contain;
+        background: transparent;
         border: none;
-        width: 140px;
-        height: 50px;
+        padding: 0;
         cursor: pointer;
         transition: transform 0.25s ease;
+        width: 140px;
+        height: 50px;
+    }
+
+    .play-btn svg {
+        width: 100%;
+        height: 100%;
+        display: block;
     }
 
     .play-btn:hover {
@@ -225,24 +231,26 @@
     }
 
     .more-btn {
+        background: transparent;
+        border: none;
+        padding: 0;
+        cursor: pointer;
         width: 40px;
         height: 40px;
-        background: rgba(255,255,255,0.15);
-        border: 1px solid rgba(255,255,255,0.3);
-        border-radius: 4px;
-        color: #ffffff;
-        font-size: 16px;
-        cursor: pointer;
+        transition: transform 0.25s ease;
         display: flex;
         align-items: center;
         justify-content: center;
-        backdrop-filter: blur(10px);
-        transition: all 0.25s ease;
+    }
+
+    .more-btn svg {
+        width: 100%;
+        height: 100%;
+        display: block;
     }
 
     .more-btn:hover {
-        background: rgba(255,255,255,0.25);
-        border-color: rgba(255,255,255,0.5);
+        transform: scale(1.1);
     }
 
     /* ======================================
@@ -414,10 +422,34 @@
   <!-- 📛 NOME DO JOGO — FICA PARADO -->
   <div class="game-name" id="game-title">DIRT 5™ | PS5</div>
 
-  <!-- ▶️ BOTÃO JOGAR — FICA PARADO -->
+  <!-- ▶️ BOTÃO JOGAR + BOTÃO MAIS — AMBOS COM SVG! -->
   <div class="play-button">
-    <button class="play-btn"></button>
-    <button class="more-btn">⋯</button>
+    <button class="play-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" width="320" height="80">
+        <!-- Fundo azul formato pílula do PS5 -->
+        <rect x="0" y="0" width="320" height="80" rx="40" fill="#00439C" />
+        <!-- Texto "Jogar" centralizado -->
+        <text x="50%" y="55%" 
+              font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" 
+              font-size="26" 
+              font-weight="bold" 
+              fill="#FFFFFF" 
+              text-anchor="middle" 
+              dominant-baseline="middle">
+          Jogar
+        </text>
+      </svg>
+    </button>
+    <button class="more-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80">
+        <!-- Fundo azul circular do PS5 -->
+        <circle cx="40" cy="40" r="38" fill="#00439C" />
+        <!-- Três pontos horizontais brancos -->
+        <circle cx="26" cy="40" r="4" fill="#FFFFFF" />
+        <circle cx="40" cy="40" r="4" fill="#FFFFFF" />
+        <circle cx="54" cy="40" r="4" fill="#FFFFFF" />
+      </svg>
+    </button>
   </div>
 
   <!-- 📊 INFO LADO DIREITO — FICA TUDO PARADO -->
